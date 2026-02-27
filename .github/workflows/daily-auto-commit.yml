@@ -2,8 +2,11 @@ name: Daily Automated Commit
 
 on:
   schedule:
-    - cron: "30 6 * * *"   # Runs daily at 06:30 UTC
+    - cron: "30 6 * * *"
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   auto-commit:
@@ -19,8 +22,8 @@ jobs:
 
       - name: Commit changes
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add daily_log.txt
           git commit -m "Daily automated commit"
           git push
